@@ -2,6 +2,8 @@
 #include <math.h>
 #include <fstream>
 
+//реализация таймера для обеспечения разных скоростей ног в зависимости от их положения
+
 vals get_desired_vals_internal(int t, leg){
 
   int forward = leg.forwards[leg.gait - 1]; 
@@ -33,9 +35,14 @@ vals get_desired_vals_internal(int t, leg){
   return result;
 }
 
-vals get_desired_vals(int t, leg leg){ 
+vals get_desired_vals(int t, leg){ 
   int elapsed_time = t - leg.startMillis;
 
+  float phase = leg.phase;
+  t = fmodf(elapsed_time + phase * leg.t_c, leg.t_c);
+  
+  return get_desired_vals_internal(t, leg);
+}
   float phase = leg.phase;
   t = fmodf(elapsed_time + phase * leg.t_c, leg.t_c);
   
