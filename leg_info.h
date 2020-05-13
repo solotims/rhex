@@ -5,7 +5,7 @@
 const int STAND = 0;
 const int WALK = 1;
 
-
+//Выбор текущего типа передвижения (Хождение, поворот, простой и т.д.)
 void update_gait(int leg_index, int gait, int startMillis){
   Gait new_gait = walk_gait;
   legs[leg_index].gait = gait;
@@ -19,7 +19,8 @@ void update_gait(int leg_index, int gait, int startMillis){
   update_gait_internal_params(legs[leg_index], startMillis);
 }
 
-void update_gait_internal_params(leg& leg, int startTime){
+
+void update_gait_internal_params(leg, int startTime){
   float ground_speed;
   float recovery_speed;
   int t_s = round(leg.t_c * leg.duty_factor);
@@ -51,15 +52,39 @@ void update_gait_internal_params(leg& leg, int startTime){
 
 }
 
+typedef struct leg_info_header leg;
+
+struct leg_info_header{
+  int id;
+  float desired_theta;
+  int forwards[5]; 
+  int gait; 
+  float zero;
+  bool right_side; 
+  bool deadzone;
+  bool dead_from_neg;
+  //следующие параметры обновляются для каждого нового типа движения
+  float theta_slow;
+  float theta_down;
+  int t_c;
+  float duty_factor;
+  float phase;
+  int startMillis;
+  float kp;
+  float kd;
+  float recovery_speed;
+  float ground_speed;
+  float thetas[5]; 
+  float ts[5];
+};
+
 float mini1Zeros[6] = {0.29, 1.46, 0.29, -2.34, 1.17, 0.29}; 
 float mini2Zeros[6] = {-0.59, -17.87, -1.76, 0.88, -5.27, -1.76};
-
 float *zeros = (active_mini == 1) ? mini1Zeros : mini2Zeros;
-
 leg leg1 =      {IDS[0], 0, {1, -1, -1,  1, 1},    0, zeros[0],  false, false, false};
 leg leg2 =      {IDS[1], 0, {1, -1, -1,  1, 1},    0, zeros[1],  false, false, false};
 leg leg3 =      {IDS[2], 0, {1, -1, -1,  1, 1},    0, zeros[2],  false, false, false};
 leg leg4 =      {IDS[3], 0, {1,  1, -1, -1, 1},    0, zeros[3],  true,  false, false};
 leg leg5 =      {IDS[4], 0, {1,  1, -1, -1, 1},    0, zeros[4],  true,  false, false};
 leg leg6 =      {IDS[5], 0, {1,  1, -1, -1, 1},    0, zeros[5],  true,  false, false};
-leg legs[] = {fake_leg0, leg1, leg2, leg3, leg4, leg5, leg6};
+leg legs[] = {leg1, leg2, leg3, leg4, leg5, leg6};
