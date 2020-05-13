@@ -4,19 +4,24 @@
 #include "pd_control.h"
 #include "gait_parameters.h"
 
+/*
+
+Подготовка двигателя dynamixel, взято как пример
+
 #define DXL_BUS_SERIAL1 1 
 Dynamixel Dxl(DXL_BUS_SERIAL1); 
 
 void setup(){
 
-	Dxl.begin(3); //baudrate set to 1 Mbps (max)
+	Dxl.begin(3); 
     Serial2.begin(57600); 
     int t_start = millis();
     for (int i = 0; i <= 5; i++){ 
-		Dxl.wheelMode(legs[i].id); //change servo to wheel mode
+		Dxl.wheelMode(legs[i].id); 
 		update_gate(i, new_gait, millis())
 	}
 }
+*/
 
 void loop(){
   for(int i = 0; i <= 5; i++){
