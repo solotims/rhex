@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <math.h>
 
+//перевод данных с энкодера в градусы и обратно
+
 
 float VMax = 0.8; 
 
