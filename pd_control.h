@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
+//ПД-регулятор, нога стремиться принять нужную позицию наикратчайшим путем по кругу
+
 float pd_controller(float theta_act, float theta_des, float v_act, float v_des, float kp, float kd){
  	float diff = fmod(theta_des - theta_act, 360);
  	float shortest_distance = 180 - fabs(fabs(diff) - 180);
