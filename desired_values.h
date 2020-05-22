@@ -1,50 +1,17 @@
-#include "control_parameters.h"
-#include <math.h>
-#include <fstream>
+#ifndef desired_values
+#define desired_values
 
-//реализация таймера для обеспечения разных скоростей ног в зависимости от их положения
+#include "leg_info.h"
 
-vals get_desired_vals_internal(int t, leg){
+typedef struct desired_vals_container vals;
 
-  int forward = leg.forwards[leg.gait - 1]; 
-  float theta;
-  float velocity;
+struct desired_vals_container{
+  float global_theta;
+  float global_velocity;
+};
 
-  if (t < leg.ts[1]){
-    theta = leg.thetas[0] + t * leg.recovery_speed;
-    velocity = leg.recovery_speed;
-  }
-  else if (t < leg.ts[2]){
-    theta = leg.thetas[1] + (t - leg.ts[1]) * leg.ground_speed;
-    velocity = leg.ground_speed;
-  }
-  else if (t < leg.ts[3]){
-    theta = leg.thetas[2] + (t - leg.ts[2]) * leg.ground_speed;
-    velocity = leg.ground_speed;
-  }
-  else{
-    theta = leg.thetas[3] + (t - leg.ts[3]) * leg.recovery_speed;
-    velocity = leg.recovery_speed;
-  }
+vals get_desired_vals(int t, leg l);
 
-  if (theta < theta_up - theta_circle) theta = theta_circle + theta;
-  else if (theta >= theta_up) theta = -theta_circle + theta;
-  theta = theta * forward;
-  velocity = velocity * forward;
-  vals result = {theta, velocity};
-  return result;
-}
+extern float recovery_speed;
 
-vals get_desired_vals(int t, leg){ 
-  int elapsed_time = t - leg.startMillis;
-
-  float phase = leg.phase;
-  t = fmodf(elapsed_time + phase * leg.t_c, leg.t_c);
-  
-  return get_desired_vals_internal(t, leg);
-}
-  float phase = leg.phase;
-  t = fmodf(elapsed_time + phase * leg.t_c, leg.t_c);
-  
-  return get_desired_vals_internal(t, leg);
 }

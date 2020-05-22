@@ -1,12 +1,9 @@
-#include <stdio.h>
-#include <math.h>
+#ifndef pd_control
+#define pd_control
 
-//ПД-регулятор, нога стремиться принять нужную позицию наикратчайшим путем по кругу
+float pd_controller(float theta_act, float theta_des, float v_act, float v_des, float kp, float kd);
 
-float pd_controller(float theta_act, float theta_des, float v_act, float v_des, float kp, float kd){
- 	float diff = fmod(theta_des - theta_act, 360);
- 	float shortest_distance = 180 - fabs(fabs(diff) - 180);
- 	float dtheta = fmodf(diff + 360, 360) < 180 ? shortest_distance : -shortest_distance;
- 	float dv = (v_des - v_act);
- 	return kp * dtheta + kd * dv;
-}
+extern float kp_hold;
+extern float kd_hold;
+
+#endif
