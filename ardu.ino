@@ -11,6 +11,22 @@
 #define DXL_BUS_SERIAL1 1 
 Dynamixel Dxl(DXL_BUS_SERIAL1); 
 
+
+#define MOVING_SPEED 32
+#define PRESENT_POS 37
+#define PRESENT_SPEED 39
+#define PRESENT_VOLTAGE 45
+
+float desired_vel;
+float desired_theta;
+float actual_vel;
+float actual_theta;
+float control_signal;
+float actual_p;
+const int legs_active = 6;
+const int packet_length =  2 * legs_active;
+word packet[packet_length]; 
+
 void setup(){
 
 	Dxl.begin(3); 
