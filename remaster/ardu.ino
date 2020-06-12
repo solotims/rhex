@@ -25,7 +25,7 @@ void setup(){
 void loop(){
   for(int i = 0; i <= 5; i++){  
   
-    actual_theta = //Текущий угол двигателя в градусах, лежащий в пределах от 0 до 360;
+    actual_theta = //Текущий угол двигателя в градусах;
 	
 	desired_theta = get_angle(millis(), legs[i]); //желаемый в данный момент угол
 	
