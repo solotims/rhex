@@ -15,7 +15,7 @@ struct leg_info{
   int speed;
 };
 
-void set_legs(int indx, int t_s, t_c);
+void set_legs(int indx, int t_s, int t_c);
 extern leg legs[6];
 
 extern const int STAND;

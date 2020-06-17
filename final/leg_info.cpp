@@ -7,25 +7,25 @@ const int REVERSE = 2;
 const int LEFT = 3;
 const int RIGHT = 4;
  
- void set_legs(int indx, int t_s, gait, t_c){
+ void set_legs(int indx, int t_start, int g, int t_cycle){
   
-    legs[indx].t_c = t_c == 0 ? 1 : t_c; //Время, за которое двигатель должен сделать 1 оборот, не может быть равно 0, т.к. является делителем в одной из функций
-    legs[indx].t_s = t_s;  //Время старта
+    legs[indx].t_c = t_cycle == 0 ? 1 : t_cycle; //Время, за которое двигатель должен сделать 1 оборот, не может быть равно 0, т.к. является делителем в одной из функций
+    legs[indx].t_s = t_start;  //Время старта
 	
 	//Если режим поворота, то одна сторона должна двигаться медленее
-    if (gait == 3) {
+    if (g == 3) {
 		if (!legs[indx].right) {
-			legs[indx].t_c = t_c * 0.7;
+			legs[indx].t_c = t_cycle * 0.7;
 		}
 			
 	}
-    if (gait == 4) {
+    if (g == 4) {
 		if (legs[indx].right) {
-			legs[indx].t_c = t_c * 0.7;
+			legs[indx].t_c = t_cycle * 0.7;
 		}
 			
 	}
-	legs[indx].speed = gait == 0 ? 0 : 360 / t_c; //Рассчетная скорость при данном времени оборота, если режим остановки, то она равна 0
+	legs[indx].speed = g == 0 ? 0 : 360 / t_c; //Рассчетная скорость при данном времени оборота, если режим остановки, то она равна 0
 }
 
 

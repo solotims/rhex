@@ -2,6 +2,6 @@
 #define desired_values
 #include "leg_info.h"
 
-float get_values(int t, leg, gait, snap);
+float get_values(int t, leg l, int g, int snap);
 
 #endif
