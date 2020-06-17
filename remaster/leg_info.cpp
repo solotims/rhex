@@ -2,10 +2,10 @@
 #include <fstream>
 
  
- void set_legs(int indx, int t_s, t_c){
+ void set_legs(int indx, int t_start, int t_cycle){
   
-    legs[indx].t_c = t_c; //Время, за которое двигатель должен сделать 1 оборот
-    legs[indx].t_s = t_s;  //Время старта
+    legs[indx].t_c = t_cycle; //Время, за которое двигатель должен сделать 1 оборот
+    legs[indx].t_s = t_start;  //Время старта
 	legs[indx].speed = 360 / t_c; //Рассчетная скорость при данном времени оборота
 	legs[indx].b_v = ;  //Напряжение, при котором подвешенный двигатель будет двигаться с рассчетной скоростью
 }

@@ -6,33 +6,32 @@
 float actual_theta;
 float desired_theta;
 float control_signal;
-int t_cycle;
-int finput;
-
-
+int set_cycle;
+int f_input;
 
 void setup(){
 
 	// Здесь должна происходить подготовка драйвера моторов к работе
 	
-	t_cycle = 2000; //Время, за которое двигатель должен сделать один оборот
+	set_cycle = 2000; //Время, за которое двигатель должен сделать один оборот
 	
 	//Задаем параметры каждой ноге
 	for (int i = 0; i < 5; i++){ 
-		set_legs(i, millis(), t_cycle);
-	}
+		set_legs(i, millis(), set_cycle);
+}
 
 void loop(){
-  for(int i = 0; i <= 5; i++){  
+    for(int i = 0; i <= 5; i++){  
   
-    actual_theta = //Текущий угол двигателя в градусах;
+      actual_theta = //Текущий угол двигателя в градусах;
 	
-	desired_theta = get_angle(millis(), legs[i]); //желаемый в данный момент угол
+	  desired_theta = get_angle(millis(), legs[i]); //желаемый в данный момент угол
 	
-    control_signal = p_controller(actual_theta, desired_theta, kp);  //П-регулятор
+      control_signal = p_controller(actual_theta, desired_theta, kp);  //П-регулятор
 	
-    finput = legs[i].b_v + control_signal;   //Подаваемый сигнал - сумма постоянной составляющей и П-регулятора
+      f_input = legs[i].b_v + control_signal;
+	  //Подаваемый сигнал - сумма постоянной составляющей и П-регулятора
 	
-    //Подача сигнала finput на двигатель, нужно учесть, что у противоположных двигателей напряжение должно быть разных знаков 
-	
+      //Подача сигнала finput на двигатель, нужно учесть, что у противоположных двигателей напряжение должно быть разных знаков 
+	};  
 }

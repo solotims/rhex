@@ -14,7 +14,7 @@ struct leg_info{
   int b_v;
 };
 
-void set_legs(int indx, int t_s, t_c);
+void set_legs(int indx, int t_start, int t_cycle);
 extern leg legs[6];
 
 
