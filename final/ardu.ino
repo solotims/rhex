@@ -20,7 +20,7 @@ void setup(){
 	
 	gait = WALK; //Начальное состояние - ходьба вперед
 	
-	standby = {0, 0, 0, 0, 0, 0};
+	standby = 0;
 	
 	//Задаем параметры каждой ноге
 	for (int i = 0; i < 5; i++){ 
@@ -32,8 +32,9 @@ void change_gait(){  //Изменение поведения
 	gait = ;
 	set_cycle = ;
 	
+	standby = desired_theta(millis(), legs[0], gait, standby);
 	for (int i = 0; i < 5; i++){ 
-		standby[i] = actual_theta[i];  // Значение угла поворота при изменение поведения, нужно для плавного перехода
+		  // Значение угла поворота при изменение поведения, нужно для плавного перехода
 		set_legs(i, millis(), gait, set_cycle);
 }	
 
@@ -47,7 +48,7 @@ void loop(){
   
 		actual_theta[i] = //Текущий угол двигателя в градусах;
 	
-		desired_theta = get_values(millis(), legs[i], gait, standby[i]) //Угол, который в идеале должен быть в данный момент
+		desired_theta = get_values(millis(), legs[i], gait, standby) //Угол, который в идеале должен быть в данный момент
 	
 		c_s = //Текущая скорость;
 	
